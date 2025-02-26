@@ -36,4 +36,32 @@ class Quiz {
             return true
         } else return false;
     }
+
+    filterQuestionsByDifficulty(difficulty) {
+//should not change the 'questions' array if the 1st argument is not a number between 1 and 3
+        if (![1, 2, 3].includes(difficulty)){
+        return; 
+    }
+// should update the 'questions' array with the questions filtered by difficulty
+    // if (!this.originalQuestions) { 
+    //     this.originalQuestions = [this.questions];
+    // }
+    // should receive 1 argument (difficulty)
+    // this.questions = this.originalQuestions.filter(question)
+
+    const difficultyFilteredQuestions = this.questions.filter((element) => {
+        if (element.difficulty === difficulty) {return true};
+    })
+    this.questions = difficultyFilteredQuestions    
+    }
+
+    averageDifficulty () {
+        if (this.questions.length === 0)
+            return 0;
+        const totalDifficulty = this.questions.reduce((acc, currentElement) => {
+            return acc + currentElement.difficulty;
+        }, 0);
+        return totalDifficulty / this.questions.length;
+    }
 }
+
